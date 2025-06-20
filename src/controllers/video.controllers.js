@@ -6,7 +6,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { Video } from "../models/video.models.js";
-import mongoose, { isValidObjectId } from "mongoose";
+import { isValidObjectId } from "mongoose";
 import { cloudinaryDelete } from "../utils/cloudinaryDelete.js";
 import { getPublicIdFromUrl } from "../utils/getCloudinaryPublicid.js";
 
@@ -203,7 +203,8 @@ const updateVideo = asyncHandler(async (req, res) => {
 
   const thumbnailpublicId = getPublicIdFromUrl(video?.thumbnail);
   try {
-    await cloudinaryDelete(thumbnailpublicId, { resource_type: "image" });
+    await cloudinary
+    (thumbnailpublicId, { resource_type: "image" });
   } catch (error) {
     throw new ApiError(
       500,
@@ -308,34 +309,41 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
 
 const getAllVideos = asyncHandler(async (req, res) => {
     const { page = 1, limit = 10, query = "", sortBy = "createdAt", sortType = "desc", userId } = req.query;
+    if(!query && !userId){
+      throw new ApiError(400, "One of 2 fields, query for title or uploader's userId is required")
+    }
 
     const skip = (page - 1) * limit;
 
     let filter = {};
     if (query) {
-        filter.title = { $regex: query, $options: "i" };
+      filter.title = { $regex: query, $options: "i" };
     }
     if (userId) {
-        filter.owner = userId;
+      filter.owner = userId;
     }
 
     const sortOptions = { [sortBy]: sortType === "desc" ? -1 : 1 };
 
-    const videos = await Video.find(filter)
-        .sort(sortOptions)
-        .skip(Number(skip))
-        .limit(Number(limit));
+    let videos
+    try {
+      videos = await Video.find(filter).sort(sortOptions).skip(Number(skip)).limit(Number(limit));
+    } catch (error) {
+      throw new ApiError(500 , "Something went wrong while retriving videos from DB")
+    }
 
-    const total = await Video.countDocuments(filter);
+    let total
+    try {
+      total = await Video.countDocuments(filter);
+    } catch (error) {throw new ApiError(500 , "Something went wrong while getting video count from DB")
+    }
 
     return res.status(200).json(new ApiResponse(200, {
-        total,
-        page: Number(page),
-        limit: Number(limit),
-        results: videos
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      results: videos
     }, "Fetched videos"));
 });
-
-
 
 export { publishVideo, getVideoById, deleteVideo, updateVideo, togglePublishStatus, getAllVideos};
