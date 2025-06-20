@@ -2,11 +2,15 @@ import {v2 as cloudinary} from 'cloudinary';
 import dotenv from "dotenv"
 dotenv.config()
 
-const cloudinaryDelete = async function (...public_ids){ // ... Operator helps with using comma seperated multiple inputs
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const cloudinaryDelete = async function (public_id , options){
     try {
-        for(const id of public_ids){
-            if (id) await cloudinary.uploader.destroy(id)
-        }
+        await cloudinary.uploader.destroy(public_id , options)
     } catch (error) {
         console.log("Could not delete the files")
     }

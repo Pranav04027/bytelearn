@@ -382,7 +382,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
       {
         // Getting MY subscribers.
         $lookup: {
-          from: "Subscription",
+          from: "subscriptions",
           localField: "_id",
           foreignField: "channel", //Find all documents where channel == MY ID
           as: "listOfSubscribers",
@@ -391,7 +391,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
       {
         //Getting the channels i have subscribed to
         $lookup: {
-          from: "Subscription",
+          from: "subscriptions",
           localField: "_id",
           foreignField: "subscriber",
           as: "listOfChannelsSubscribedto",
@@ -447,14 +447,14 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     },
     {
       $lookup: {
-        from: "Video",
+        from: "videos",
         localField: "watchHistory",
         foreignField: "_id",
         as: "listOfWatchedVideos",
         pipeline: [
           {
             $lookup: {
-              from: "User",
+              from: "users",
               localField: "owner",
               foreignField: "_id",
               as: "owner",
