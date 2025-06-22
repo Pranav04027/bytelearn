@@ -75,7 +75,8 @@ PATCH /api/playlists/:playlistId - Update a playlist
 POST /api/playlists/:playlistId/:videoId - Add video to playlist
 DELETE /api/playlists/:playlistId/:videoId - Remove video from playlist
 
-Full API documentation (Postman collection) will be added soon.
+Full API documentation from Postman:
+https://documenter.getpostman.com/view/45456961/2sB2xBEqF1
 
 🧑‍🎓 Author
 Pranav Chauhan
