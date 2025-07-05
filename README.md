@@ -1,43 +1,48 @@
-🎬 VidTube (Backend Only)
+# byte learn
 
-VidTube is a YouTube-inspired video-sharing backend API built using Node.js, Express, MongoDB, and Cloudinary for media storage.
-This is a learning project focused on building a robust backend for a video-sharing platform.
+🎓 **Tagline**: Bite-Sized Learning for Everyone
 
-🚀 Features
-User registration and login with JWT-based authentication
-Secure access and refresh token system
-Video and thumbnail uploads via Cloudinary
-Video management (publish, unpublish, update, delete)
-Video view tracking
-Like and comment on videos
-Playlist creation, management, and video addition/removal
-User subscriptions to channels
-MongoDB aggregation pipelines and pagination
-Middleware for authentication, error handling, and file uploads
+**byte learn** is a video-based educational platform built with **Node.js**, **Express**, **MongoDB**, and **Cloudinary**, designed for educators to share short, structured learning modules and for learners to engage with curated content. This project showcases a full-stack solution with a robust backend API and a forthcoming React frontend, tailored for delivering bite-sized educational content.
 
-📚 What I Learned
-Setting up an Express server with MVC architecture
-Modeling relationships in MongoDB using Mongoose
-Handling file uploads with Multer and Cloudinary
-Building secure REST APIs with JWT authentication
-Implementing MongoDB aggregation pipelines and pagination
-Creating middleware for authentication and input validation
-Managing scalable CRUD operations and media storage
+---
 
-📌 Important Note
-I followed a tutorial only up to the User controller and route setup. 
-Everything else — including video handling, playlists, likes, comments, subscriptions, and Cloudinary integration — was designed and implemented by me to deepen my understanding of backend development.
+## 🚀 Features
+- **User Authentication**: Secure registration and login with JWT-based authentication and refresh tokens.
+- **Lesson Management**: Upload, update, publish, unpublish, and delete lessons (videos) with Cloudinary for media storage.
+- **Categories and Tags**: Organize lessons by subject (e.g., "Programming," "Science") and difficulty (e.g., "Beginner," "Advanced").
+- **User Roles**: Support for **instructor** and **learner** roles with tailored access control.
+- **Progress Tracking**: Track watched lessons to monitor learner progress.
+- **Playlists**: Create, manage, and organize lessons into learning paths.
+- **Engagement**: Like and comment on lessons to foster interactive Q&A discussions.
+- **Scalable Architecture**: Leverage MongoDB aggregation pipelines and pagination for efficient data handling.
 
-🛠 Tech Stack
-Node.js / Express.js
-MongoDB with Mongoose
-Cloudinary for media storage
-Multer for file uploads
-JWT for authentication
-dotenv, cors, helmet, morgan for server utilities
+---
 
-📁 Project Structure
-vidtube/
+## 📚 What I Learned
+- Building a full-stack application with **Express** and **MongoDB** using MVC architecture.
+- Modeling complex relationships in MongoDB with **Mongoose**.
+- Handling file uploads with **Multer** and **Cloudinary**.
+- Implementing secure REST APIs with **JWT** authentication.
+- Designing scalable CRUD operations and media storage.
+- Enhancing APIs with categories, tags, user roles, and progress tracking for educational use.
+- Preparing a backend for seamless integration with a **React** frontend.
+
+---
+
+## 🛠 Tech Stack
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB with Mongoose
+- **Media Storage**: Cloudinary
+- **File Uploads**: Multer
+- **Authentication**: JWT
+- **Utilities**: dotenv, cors, helmet, morgan
+- **Frontend (Planned)**: React.js
+
+---
+
+## 📁 Project Structure
+```
+byte-learn/
 ├── src/
 │   ├── controllers/
 │   ├── models/
@@ -49,41 +54,69 @@ vidtube/
 ├── .env.sample   # Environment variable template
 ├── .gitignore
 ├── package.json
+```
 
-⚙️ Getting Started
-Clone the Repository
-git clone https://github.com/Pranav04027/vidtube.git
-cd vidtube
-Install Dependencies
-npm install
-Set Up Environment Variables
-Copy .env.sample to create a .env file, add your values for .env file
-Run the Server
-npm run dev
+---
 
-🧪 API Endpoints
+## ⚙️ Getting Started
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Pranav04027/byte-learn.git
+   cd byte-learn
+   ```
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+3. **Set Up Environment Variables**
+   - Copy `.env.sample` to create a `.env` file.
+   - Add your values (e.g., MongoDB URI, Cloudinary credentials, JWT secret).
+4. **Run the Server**
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## 🧪 API Endpoints
 Key endpoints include:
 
-POST /api/users/register - Register a new user
-POST /api/users/login - User login
-POST /api/videos - Upload a video
-PATCH /api/videos/:videoId - Update video details
-DELETE /api/videos/:videoId - Delete a video
-GET /api/videos/:videoId - Get video details
-POST /api/playlists - Create a playlist
-PATCH /api/playlists/:playlistId - Update a playlist
-POST /api/playlists/:playlistId/:videoId - Add video to playlist
-DELETE /api/playlists/:playlistId/:videoId - Remove video from playlist
+- **POST /api/users/register** - Register a new user (with role selection: instructor/learner)
+- **POST /api/users/login** - User login
+- **POST /api/lessons** - Upload a lesson (video) with category and tags
+- **PATCH /api/lessons/:lessonId** - Update lesson details
+- **DELETE /api/lessons/:lessonId** - Delete a lesson
+- **GET /api/lessons/:lessonId** - Get lesson details
+- **GET /api/lessons?category=Programming&tag=Beginner** - Filter lessons by category and tags
+- **POST /api/users/watched/:lessonId** - Mark a lesson as watched
+- **GET /api/users/watched** - Retrieve watched lessons
+- **POST /api/playlists** - Create a playlist
+- **PATCH /api/playlists/:playlistId** - Update a playlist
+- **POST /api/playlists/:playlistId/:lessonId** - Add lesson to playlist
+- **DELETE /api/playlists/:playlistId/:lessonId** - Remove lesson from playlist
 
-Full API documentation from Postman:
-https://documenter.getpostman.com/view/45456961/2sB2xBEqF1
+**Full API documentation**: [Postman Documentation](https://documenter.getpostman.com/view/45456961/2sB2xBEqF1)
 
-🧑‍🎓 Author
-Pranav Chauhan
-A learning project built to master backend development.
-📧 chauhanpranav040@gmail.com.com
-🐙 GitHub: Pranav04027
+---
 
-📝 License
-This project is licensed under the MIT License. Feel free to use and modify for learning purposes.
+## 🖼 Frontend Integration (Planned)
+The **React** frontend will include:
+- **Lesson Upload Form**: Fields for title, description, category, and tags for instructors.
+- **Lesson Browsing**: Filters for categories and tags to help learners find relevant content.
+- **User Registration**: Role selection (instructor/learner) during signup.
+- **Learner Dashboard**: Display watched lessons and progress tracking.
+- **Instructor Dashboard**: Manage uploaded lessons, view statistics, and monitor comments.
+
+---
+
+## 🧑‍🎓 Author
+**Pranav Chauhan**  
+A learning project to master full-stack development.  
+📧 [chauhanpranav040@gmail.com](mailto:chauhanpranav040@gmail.com)  
+🐙 [GitHub: Pranav04027](https://github.com/Pranav04027)
+
+---
+
+## 📝 License
+This project is licensed under the **MIT License**. Feel free to use and modify for learning purposes.  
 Want to contribute or have suggestions? Open an issue or PR on GitHub!
