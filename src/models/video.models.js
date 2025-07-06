@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import mongoose, { Schema } from "mongoose";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
@@ -70,3 +71,53 @@ const videoSchema = new Schema(
 videoSchema.plugin(mongooseAggregatePaginate);
 
 export const Video = mongoose.model("Video", videoSchema);
+=======
+import mongoose , {Schema} from "mongoose";
+import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
+
+
+const videoSchema = new Schema(
+    {
+        videofile: {
+            type: String, //cloudinary url
+            required: true,
+            unique: true,
+        },
+        thumbnail: {
+            type: String, //cloudinary url
+            required: true,
+            unique: true,
+        },
+        title: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        description: {
+            type: String,
+            required: true,
+        },
+        views: {
+            type: Number,
+            default: 0,
+        },
+        duration: {
+            type: String,
+            required: true,
+        },
+        isPublished: {
+            type: Boolean,
+            default: true,
+        },
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
+    }, {timestamps: true}
+)
+
+// Enable aggregate pagination
+videoSchema.plugin(mongooseAggregatePaginate)
+
+export const Video = mongoose.model("Video" , videoSchema)
+>>>>>>> f40e5f10f34a097e96bb54188a6106ccb3fdd904

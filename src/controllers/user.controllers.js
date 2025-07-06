@@ -1,7 +1,10 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.models.js";
+<<<<<<< HEAD
 import { QuizAttempt } from "../models/quizAttempt.models.js";
+=======
+>>>>>>> f40e5f10f34a097e96bb54188a6106ccb3fdd904
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { cloudinaryDelete } from "../utils/cloudinaryDelete.js";
@@ -144,7 +147,11 @@ const loginUser = asyncHandler(async (req, res) => {
   });
 
   if (!user) {
+<<<<<<< HEAD
     throw new ApiError(404, "User Not Found");
+=======
+    throw new ApiError("404", "User Not Found");
+>>>>>>> f40e5f10f34a097e96bb54188a6106ccb3fdd904
   }
 
   //Validate password
@@ -516,6 +523,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     );
 });
 
+<<<<<<< HEAD
 export const getLearnerDashboard = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
     .populate("progress.video", "title thumbnail duration category difficulty")
@@ -547,6 +555,8 @@ export const getLearnerDashboard = asyncHandler(async (req, res) => {
 });
 
 
+=======
+>>>>>>> f40e5f10f34a097e96bb54188a6106ccb3fdd904
 export {
   registerUser,
   loginUser,

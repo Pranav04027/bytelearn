@@ -308,6 +308,7 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
 });
 
 const getAllVideos = asyncHandler(async (req, res) => {
+<<<<<<< HEAD
   const {
     page = 1,
     limit = 10,
@@ -371,6 +372,39 @@ const getAllVideos = asyncHandler(async (req, res) => {
 
   return res.status(200).json(
     new ApiResponse(200, {
+=======
+    const { page = 1, limit = 10, query = "", sortBy = "createdAt", sortType = "desc", userId } = req.query;
+    if(!query && !userId){
+      throw new ApiError(400, "One of 2 fields, query for title or uploader's userId is required")
+    }
+
+    const skip = (page - 1) * limit;
+
+    let filter = {};
+    if (query) {
+      filter.title = { $regex: query, $options: "i" };
+    }
+    if (userId) {
+      filter.owner = userId;
+    }
+
+    const sortOptions = { [sortBy]: sortType === "desc" ? -1 : 1 };
+
+    let videos
+    try {
+      videos = await Video.find(filter).sort(sortOptions).skip(Number(skip)).limit(Number(limit));
+    } catch (error) {
+      throw new ApiError(500 , "Something went wrong while retriving videos from DB")
+    }
+
+    let total
+    try {
+      total = await Video.countDocuments(filter);
+    } catch (error) {throw new ApiError(500 , "Something went wrong while getting video count from DB")
+    }
+
+    return res.status(200).json(new ApiResponse(200, {
+>>>>>>> f40e5f10f34a097e96bb54188a6106ccb3fdd904
       total,
       page: Number(page),
       limit: Number(limit),
@@ -378,5 +412,8 @@ const getAllVideos = asyncHandler(async (req, res) => {
     }, "Fetched videos"));
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f40e5f10f34a097e96bb54188a6106ccb3fdd904
 export { publishVideo, getVideoById, deleteVideo, updateVideo, togglePublishStatus, getAllVideos};

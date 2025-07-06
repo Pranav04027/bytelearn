@@ -9,8 +9,12 @@ import { registerUser,
          updateUserAvatar,
          updateUserCoverImage,
          getUserChannelProfile,
+<<<<<<< HEAD
          getWatchHistory,
          getLearnerDashboard
+=======
+         getWatchHistory
+>>>>>>> f40e5f10f34a097e96bb54188a6106ccb3fdd904
         } from "../controllers/user.controllers.js";
 import {upload} from "../middlewares/multer.middlewares.js"
 import {verifyJWT} from "../middlewares/auth.middlewares.js"
@@ -48,8 +52,11 @@ router.route("/current-user").get(verifyJWT, getCurrentUser) // Nothing, Just Sh
 
 router.route("/update-account-details").patch(verifyJWT, updateAccountDetails) // username , email
 
+<<<<<<< HEAD
 router.get("/dashboard", verifyJWT, getLearnerDashboard);
 
+=======
+>>>>>>> f40e5f10f34a097e96bb54188a6106ccb3fdd904
 router.route("/update-avatar").patch(
     verifyJWT,
     upload.single("avatar"),

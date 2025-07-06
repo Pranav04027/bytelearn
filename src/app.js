@@ -37,10 +37,13 @@
     import likeRouter from "./routes/like.routes.js"
     import dashboardRouter from "./routes/dashboard.routers.js"
     import { errorHandler } from "./middlewares/error.middlewares.js"
+<<<<<<< HEAD
     import bookmarkRouter from "./routes/bookmark.routes.js";
     import progressRouter from "./routes/progress.routes.js";
     import recommendationRouter from "./routes/recommendation.routes.js";
     import quizRouter from "./routes/quiz.routes.js";
+=======
+>>>>>>> f40e5f10f34a097e96bb54188a6106ccb3fdd904
 
 
     //use routes
@@ -53,10 +56,14 @@
     app.use("/api/v1/tweets", tweetRouter)
     app.use("/api/v1/likes", likeRouter)
     app.use("/api/v1/dashboard", dashboardRouter)
+<<<<<<< HEAD
     app.use("/api/v1/bookmarks", bookmarkRouter);
     app.use("/api/v1/progress", progressRouter);
     app.use("/api/v1/recommendations", recommendationRouter);
     app.use("/api/v1/quizzes", quizRouter);
+=======
+    
+>>>>>>> f40e5f10f34a097e96bb54188a6106ccb3fdd904
 
 
     app.use(errorHandler)
